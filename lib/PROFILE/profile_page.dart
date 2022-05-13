@@ -36,7 +36,6 @@ class _PROFILEPAGEState extends State<PROFILEPAGE> {
         },
         label: const Text('Add Profile'),
         icon: const Icon(Icons.add),
-        backgroundColor: Colors.blue,
       ),
     );
   }

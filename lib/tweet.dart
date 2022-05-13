@@ -453,8 +453,8 @@ class _TWEETState extends State<TWEET> {
 
                   // COMMENT ICON CLICK
 
-                    // ListViewCommentBox(list:_list),
-                    COMMENTBOX(list:_list),
+                    ListViewCommentBox(list:_list),
+                    // COMMENTBOX(list:_list),
 
 
 

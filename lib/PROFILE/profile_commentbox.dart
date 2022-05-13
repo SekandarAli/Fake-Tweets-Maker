@@ -46,7 +46,8 @@ class _ProfileCommentBoxState extends State<ProfileCommentBox> {
                     child: CircleAvatar(
                       radius: 35,
                       backgroundImage: _profileImagePick != null
-                          ? widget.list[index].image as ImageProvider
+                          ? FileImage(File(_profileImagePick!.path))
+                      as ImageProvider
                           : AssetImage("assets/images/profile2.png"),
                     ),
                   ),
