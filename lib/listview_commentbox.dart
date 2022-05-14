@@ -29,237 +29,239 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      itemCount: widget.list.length,
-      itemBuilder: (context, index) {
-        return Row(
-          children: [
-            GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  context: context,
-                  builder: ((builder) {
-                    return bottomSheet();
-                  }),
-                );
-              },
-              child: CircleAvatar(
-                radius: 27,
-                backgroundImage: _profileImagePick != null
-                    ? widget.list[index].image as ImageProvider
-                    : AssetImage("assets/images/profile2.png"),
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        itemCount: widget.list.length,
+        itemBuilder: (context, index) {
+          return Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: ((builder) {
+                      return bottomSheet();
+                    }),
+                  );
+                },
+                child: CircleAvatar(
+                  radius: 27,
+                  backgroundImage: _profileImagePick != null
+                      ? widget.list[index].image as ImageProvider
+                      : AssetImage("assets/images/profile2.png"),
+                ),
               ),
-            ),
-            SizedBox(width: 10),
-            //Profile name/Username
+              SizedBox(width: 10),
+              //Profile name/Username
 
-            Flexible(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () async {
-                              final profile = await openDialogue();
-                              if (profile!.isEmpty) {
-                                return;
-                              }
-                              setState(() => widget.list[index].profileName = profile);
-                            },
-                            child: Text(
-                              widget.list[index].profileName,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 4),
-                          if (isVisibleVerifiedIcon)
-                            CircleAvatar(
-                              radius: 7,
-                              backgroundImage:
-                                  AssetImage("assets/images/verified.png"),
-                            ),
-                          SizedBox(width: 2),
-                          if (isVisibleProtectedIcon)
-                            CircleAvatar(
-                              radius: 7,
-                              backgroundColor: Colors.white,
-                              backgroundImage:
-                                  AssetImage("assets/images/lock.png"),
-                            ),
-                          SizedBox(width: 5),
-                          GestureDetector(
-                            onTap: () async {
-                              final user = await openDialogue();
-                              if (user!.isEmpty) {
-                                return;
-                              }
-                              setState(() => widget.list[index].userNameGrey = user);
-                            },
-                            child: Text(
-                              widget.list[index].userNameGrey,
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            " · ",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            "2m",
-                            style: TextStyle(
-                              fontSize: 15,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 2),
-                      GestureDetector(
-                        onTap: () async {
-                          final user = await openDialogue();
-                          if (user!.isEmpty) {
-                            return;
-                          }
-                          setState(() => widget.list[index].userNameBlue = user);
-                        },
-                        child: Row(
+              Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Text(
-                              "Replying to",
-                              style: TextStyle(
-                                fontSize: 15,
+                            GestureDetector(
+                              onTap: () async {
+                                final profile = await openDialogue();
+                                if (profile!.isEmpty) {
+                                  return;
+                                }
+                                setState(() => widget.list[index].profileName = profile);
+                              },
+                              child: Text(
+                                widget.list[index].profileName,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
+                            SizedBox(width: 4),
+                            if (isVisibleVerifiedIcon)
+                              CircleAvatar(
+                                radius: 7,
+                                backgroundImage:
+                                    AssetImage("assets/images/verified.png"),
+                              ),
+                            SizedBox(width: 2),
+                            if (isVisibleProtectedIcon)
+                              CircleAvatar(
+                                radius: 7,
+                                backgroundColor: Colors.white,
+                                backgroundImage:
+                                    AssetImage("assets/images/lock.png"),
+                              ),
                             SizedBox(width: 5),
+                            GestureDetector(
+                              onTap: () async {
+                                final user = await openDialogue();
+                                if (user!.isEmpty) {
+                                  return;
+                                }
+                                setState(() => widget.list[index].userNameGrey = user);
+                              },
+                              child: Text(
+                                widget.list[index].userNameGrey,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
                             Text(
-                              widget.list[index].userNameBlue,
+                              " · ",
                               style: TextStyle(
                                 fontSize: 15,
-                                color: Colors.blue,
+                              ),
+                            ),
+                            Text(
+                              "2m",
+                              style: TextStyle(
+                                fontSize: 15,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      SizedBox(height: 8),
-                      GestureDetector(
-                        onTap: () async {
-                          final reply = await openDialogue();
-                          if (reply!.isEmpty) {
-                            return;
-                          }
-                          setState(() => widget.list[index].typeReply = reply);
-                        },
-                        child: Text(
-                          widget.list[index].typeReply,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                        SizedBox(height: 2),
+                        GestureDetector(
+                          onTap: () async {
+                            final user = await openDialogue();
+                            if (user!.isEmpty) {
+                              return;
+                            }
+                            setState(() => widget.list[index].userNameBlue = user);
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                "Replying to",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                ),
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                widget.list[index].userNameBlue,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      SizedBox(height: 8),
-
-                      //COMMENT ICONS
-
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width / 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(
-                              Icons.comment_outlined,
-                              size: 18,
+                        SizedBox(height: 8),
+                        GestureDetector(
+                          onTap: () async {
+                            final reply = await openDialogue();
+                            if (reply!.isEmpty) {
+                              return;
+                            }
+                            setState(() => widget.list[index].typeReply = reply);
+                          },
+                          child: Text(
+                            widget.list[index].typeReply,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
                             ),
-                            Icon(
-                              Icons.repeat_outlined,
-                              size: 18,
-                            ),
-                            Icon(
-                              Icons.favorite_outline,
-                              size: 18,
-                            ),
-                            Icon(
-                              Icons.share_outlined,
-                              size: 18,
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 20),
+                        SizedBox(height: 8),
 
-                    ],
-                  ),
+                        //COMMENT ICONS
 
-                  //  POP UP MENU BUTTON
-
-                  PopupMenuButton(
-                      itemBuilder: (context) => [
-                            PopupMenuItem(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isVisibleProtectedIcon =
-                                        !isVisibleProtectedIcon;
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                child: isVisibleProtectedIcon
-                                    ? Text("Hide Protected Icon")
-                                    : Text("Add Protected Icon"),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 2,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.comment_outlined,
+                                size: 18,
                               ),
-                              value: 0,
-                            ),
-                            PopupMenuItem(
-                              child: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    isVisibleVerifiedIcon =
-                                        !isVisibleVerifiedIcon;
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                child: isVisibleVerifiedIcon
-                                    ? Text("Hide Verified Icon")
-                                    : Text("Add Verified Icon"),
+                              Icon(
+                                Icons.repeat_outlined,
+                                size: 18,
                               ),
-                              value: 2,
-                            ),
-                            PopupMenuItem(
-                              child: GestureDetector(
-                                  onTap:() {
+                              Icon(
+                                Icons.favorite_outline,
+                                size: 18,
+                              ),
+                              Icon(
+                                Icons.share_outlined,
+                                size: 18,
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20),
+
+                      ],
+                    ),
+
+                    //  POP UP MENU BUTTON
+
+                    PopupMenuButton(
+                        itemBuilder: (context) => [
+                              PopupMenuItem(
+                                child: GestureDetector(
+                                  onTap: () {
                                     setState(() {
-
-                                      widget.list.removeAt(index);
+                                      isVisibleProtectedIcon =
+                                          !isVisibleProtectedIcon;
                                       Navigator.pop(context);
-
-
                                     });
-                                    },
+                                  },
+                                  child: isVisibleProtectedIcon
+                                      ? Text("Hide Protected Icon")
+                                      : Text("Add Protected Icon"),
+                                ),
+                                value: 0,
+                              ),
+                              PopupMenuItem(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      isVisibleVerifiedIcon =
+                                          !isVisibleVerifiedIcon;
+                                      Navigator.pop(context);
+                                    });
+                                  },
+                                  child: isVisibleVerifiedIcon
+                                      ? Text("Hide Verified Icon")
+                                      : Text("Add Verified Icon"),
+                                ),
+                                value: 2,
+                              ),
+                              PopupMenuItem(
+                                child: GestureDetector(
+                                    onTap:() {
+                                      setState(() {
+
+                                        widget.list.removeAt(index);
+                                        Navigator.pop(context);
 
 
-                                  child: Text("Delete")),
-                              value: 3,
-                            ),
-                          ]),
-                ],
+                                      });
+                                      },
+
+
+                                    child: Text("Delete")),
+                                value: 3,
+                              ),
+                            ]),
+                  ],
+                ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+      ),
     );
   }
 

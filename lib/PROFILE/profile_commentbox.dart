@@ -2,6 +2,8 @@
 
 import 'package:fake_tweet/MODEL/data_model.dart';
 import 'package:fake_tweet/MODEL/profile_model.dart';
+import 'package:fake_tweet/PROFILE/profile_previous_data.dart';
+import 'package:fake_tweet/tweet.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -23,112 +25,114 @@ class _ProfileCommentBoxState extends State<ProfileCommentBox> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: widget.list.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              Row(
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      itemCount: widget.list.length,
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PreviousData(),
+                settings: RouteSettings(
+                  arguments: widget.list[index].profileName,
+                ),
+              )),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
+            child: Card(
+              child: Column(
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: ((builder) {
-                          return bottomSheet();
-                        }),
-                      );
-                    },
-                    child: CircleAvatar(
-                      radius: 35,
-                      backgroundImage: _profileImagePick != null
-                          ? FileImage(File(_profileImagePick!.path))
-                      as ImageProvider
-                          : AssetImage("assets/images/profile2.png"),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  //Profile name/Username
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: ((builder) {
+                              return bottomSheet();
+                            }),
+                          );
+                        },
+                        child: CircleAvatar(
+                          radius: 35,
+                          backgroundImage: _profileImagePick != null
+                              ? FileImage(File(_profileImagePick!.path))
+                                  as ImageProvider
+                              : AssetImage("assets/images/profile2.png"),
+                        ),
+                      ),
+                      SizedBox(width: 20),
+                      //Profile name/Username
 
-                  Flexible(
-                    child: Row(
-                      children: [
-                        Column(
-
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      Flexible(
+                        child: Row(
                           children: [
-                            GestureDetector(
-                              onTap: () async {
-                                final profile = await openDialogue();
-                                if (profile!.isEmpty) {
-                                  return;
-                                }
-                                setState(() =>
-                                    widget.list[index].profileName = profile);
-                              },
-                              child: Text(
-                                widget.list[index].profileName,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () async {
+                                    final profile = await openDialogue();
+                                    if (profile!.isEmpty) {
+                                      return;
+                                    }
+                                    setState(() => widget
+                                        .list[index].profileName = profile);
+                                  },
+                                  child: Text(
+                                    widget.list[index].profileName,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            SizedBox(height: 5),
-                            GestureDetector(
-                              onTap: () async {
-                                final user = await openDialogue();
-                                if (user!.isEmpty) {
-                                  return;
-                                }
-                                setState(
-                                    () => widget.list[index].userName = user);
-                              },
-                              child: Text(
-                                widget.list[index].userName,
-                                style: TextStyle(
-                                  fontSize: 20,
+                                SizedBox(height: 5),
+                                GestureDetector(
+                                  onTap: () async {
+                                    final user = await openDialogue();
+                                    if (user!.isEmpty) {
+                                      return;
+                                    }
+                                    setState(() =>
+                                        widget.list[index].userName = user);
+                                  },
+                                  child: Text(
+                                    widget.list[index].userName,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            widget.list.removeAt(index);
+                          });
+                        },
+                        child: Icon(
+                          Icons.delete,
+                          size: 35,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
-
-                  GestureDetector(
-
-                    onTap:() {
-                      setState(() {
-
-                        widget.list.removeAt(index);
-
-
-                      });
-                    },
-
-
-
-                    child: Icon(Icons.delete,
-                    size: 35,
-                    color: Colors.grey,),
-                  ),
-                 ],
-
+                  SizedBox(height: 20)
+                ],
               ),
-              SizedBox(height: 20)
-
-            ],
-
-          );
-        },
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 
