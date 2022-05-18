@@ -3,18 +3,10 @@
 import 'package:fake_tweet/Functions/date.dart';
 import 'package:fake_tweet/Functions/share_screenshot.dart';
 import 'package:fake_tweet/Functions/time.dart';
-import 'package:fake_tweet/WIDGETS/commentbox.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:screenshot/screenshot.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:typed_data/typed_data.dart';
-import 'package:share_plus/share_plus.dart';
-import 'dart:typed_data';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'MODEL/data_model.dart';
 import 'listview_commentbox.dart';
