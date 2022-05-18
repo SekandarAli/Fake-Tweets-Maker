@@ -8,7 +8,7 @@ class MODELDATA {
   String userNameBlue = '@username';
   String time = '20m';
   String typeReply = 'Type Reply';
-  AssetImage image =  AssetImage("assets/images/profile2.png");
+  AssetImage image;
 
   MODELDATA(
       {required this.profileName,

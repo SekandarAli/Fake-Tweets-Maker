@@ -6,10 +6,12 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class ListViewCommentBox extends StatefulWidget {
-
   final List<MODELDATA> list;
 
-  const ListViewCommentBox({Key? key, required this.list,}) : super(key: key);
+  const ListViewCommentBox({
+    Key? key,
+    required this.list,
+  }) : super(key: key);
 
   @override
   State<ListViewCommentBox> createState() => _ListViewCommentBoxState();
@@ -25,7 +27,6 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
   bool isVisibleMainImage = true;
   bool isVisibleProtectedIcon = false;
   bool isVisibleVerifiedIcon = true;
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +50,8 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                 child: CircleAvatar(
                   radius: 27,
                   backgroundImage: _profileImagePick != null
-                      ? widget.list[index].image as ImageProvider
-                      : AssetImage("assets/images/profile2.png"),
+                      ? FileImage(File(_profileImagePick!.path)) as ImageProvider
+                      : AssetImage("assets/images/profile.jpg"),
                 ),
               ),
               SizedBox(width: 10),
@@ -71,7 +72,8 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                                 if (profile!.isEmpty) {
                                   return;
                                 }
-                                setState(() => widget.list[index].profileName = profile);
+                                setState(() =>
+                                    widget.list[index].profileName = profile);
                               },
                               child: Text(
                                 widget.list[index].profileName,
@@ -103,7 +105,8 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                                 if (user!.isEmpty) {
                                   return;
                                 }
-                                setState(() => widget.list[index].userNameGrey = user);
+                                setState(() =>
+                                    widget.list[index].userNameGrey = user);
                               },
                               child: Text(
                                 widget.list[index].userNameGrey,
@@ -133,7 +136,8 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                             if (user!.isEmpty) {
                               return;
                             }
-                            setState(() => widget.list[index].userNameBlue = user);
+                            setState(
+                                () => widget.list[index].userNameBlue = user);
                           },
                           child: Row(
                             children: [
@@ -161,7 +165,8 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                             if (reply!.isEmpty) {
                               return;
                             }
-                            setState(() => widget.list[index].typeReply = reply);
+                            setState(
+                                () => widget.list[index].typeReply = reply);
                           },
                           child: Text(
                             widget.list[index].typeReply,
@@ -200,7 +205,6 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                           ),
                         ),
                         SizedBox(height: 20),
-
                       ],
                     ),
 
@@ -240,17 +244,12 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                               ),
                               PopupMenuItem(
                                 child: GestureDetector(
-                                    onTap:() {
+                                    onTap: () {
                                       setState(() {
-
                                         widget.list.removeAt(index);
                                         Navigator.pop(context);
-
-
                                       });
-                                      },
-
-
+                                    },
                                     child: Text("Delete")),
                                 value: 3,
                               ),
@@ -327,12 +326,14 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
     );
   }
 
-  void takePhoto(ImageSource source) async {
+  void takePhoto(
+    ImageSource source,
+  ) async {
     final pickedFile = await _profileImage.getImage(
       source: source,
     );
     setState(() {
-       _profileImagePick = pickedFile!;
+      _profileImagePick = pickedFile!;
     });
 
     // setState((){

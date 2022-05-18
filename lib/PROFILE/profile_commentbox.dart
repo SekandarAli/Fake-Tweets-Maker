@@ -39,6 +39,9 @@ class _ProfileCommentBoxState extends State<ProfileCommentBox> {
                   arguments: widget.list[index].profileName,
                 ),
               )),
+
+//          Navigator.pop(context,widget.list[index].profileName),
+
           child: Padding(
             padding: const EdgeInsets.only(top: 5, left: 10, right: 10),
             child: Card(
