@@ -1,23 +1,21 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 
-import 'package:fake_tweet/MODEL/data_model.dart';
+import 'package:fake_tweet/MODEL/model_tweet.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class ListViewCommentBox extends StatefulWidget {
-  final List<MODELDATA> list;
+class CommentBox extends StatefulWidget {
+  final List<ModelTweet> list;
 
-  const ListViewCommentBox({
-    Key? key,
-    required this.list,
-  }) : super(key: key);
+  CommentBox({Key? key, required this.list}) : super(key: key);
+
 
   @override
-  State<ListViewCommentBox> createState() => _ListViewCommentBoxState();
+  State<CommentBox> createState() => _CommentBoxState();
 }
 
-class _ListViewCommentBoxState extends State<ListViewCommentBox> {
+class _CommentBoxState extends State<CommentBox> {
   final ImagePicker _profileImage = ImagePicker();
   PickedFile? _profileImagePick;
 
@@ -50,7 +48,8 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                 child: CircleAvatar(
                   radius: 27,
                   backgroundImage: _profileImagePick != null
-                      ? FileImage(File(_profileImagePick!.path)) as ImageProvider
+                      ? FileImage(File(_profileImagePick!.path))
+                          as ImageProvider
                       : AssetImage("assets/images/profile.jpg"),
                 ),
               ),
@@ -76,7 +75,7 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                                     widget.list[index].profileName = profile);
                               },
                               child: Text(
-                                widget.list[index].profileName,
+                                widget.list[index].profileName!,
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -109,7 +108,7 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                                     widget.list[index].userNameGrey = user);
                               },
                               child: Text(
-                                widget.list[index].userNameGrey,
+                                widget.list[index].userNameGrey!,
                                 style: TextStyle(
                                   fontSize: 16,
                                 ),
@@ -149,7 +148,7 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                               ),
                               SizedBox(width: 5),
                               Text(
-                                widget.list[index].userNameBlue,
+                                widget.list[index].userNameBlue!,
                                 style: TextStyle(
                                   fontSize: 15,
                                   color: Colors.blue,
@@ -169,7 +168,7 @@ class _ListViewCommentBoxState extends State<ListViewCommentBox> {
                                 () => widget.list[index].typeReply = reply);
                           },
                           child: Text(
-                            widget.list[index].typeReply,
+                            widget.list[index].typeReply!,
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

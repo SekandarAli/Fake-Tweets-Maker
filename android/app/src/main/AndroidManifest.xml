@@ -9,7 +9,7 @@
        android:requestLegacyExternalStorage="true"
         android:label="Fake Tweet"
         android:name="${applicationName}"
-        android:icon="@android:drawable/toast_frame"
+        android:icon="@android:drawable/star_big_off"
         android:roundIcon="@android:drawable/toast_frame"
        >
         <activity

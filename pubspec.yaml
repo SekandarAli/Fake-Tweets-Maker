@@ -15,24 +15,33 @@ dependencies:
   flutter:
     sdk: flutter
 
-
+  flutter_lints: ^1.0.0
+  screenshot: ^1.2.3
+  share_plus: ^4.0.4
+  flex_color_scheme: ^4.2.0
+  path_provider: ^2.0.9
+  permission_handler: ^9.2.0
+  hive: ^2.2.1
+  provider: ^6.0.3
+  hive_flutter: ^1.1.0
+  date_format: ^2.0.6
+  floating_navigation_bar: ^0.0.5
+  hive_generator: ^1.1.3
+  build_runner: ^2.1.11
+  syncfusion_flutter_pdf: ^20.1.59-beta
+  open_file: ^3.2.1
+  flutter_multi_select_items: ^0.4.0
+  image_picker: ^0.8.5+3
+  image_gallery_saver: ^1.7.1
+  charts_flutter: ^0.12.0
+  animations: ^2.0.3
+  fluttertoast: ^8.0.9
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^1.0.0
-  image_picker: ^0.8.5
-  screenshot: ^1.2.3
-  share_plus: ^4.0.4
-  flex_color_scheme: ^4.2.0
-  path_provider: ^2.0.9
-  image_gallery_saver: ^1.7.1
-  permission_handler: ^9.2.0
-  file: ^6.1.2
-  fluttertoast: ^8.0.9
-  provider: ^6.0.2
 
 
 flutter:
