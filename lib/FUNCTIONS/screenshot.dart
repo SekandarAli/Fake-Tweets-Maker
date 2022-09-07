@@ -8,7 +8,7 @@ class SCREENSHOT {
     await [Permission.storage].request();
 
     const name = "Fake Tweet";
-    final result = await ImageGallerySaver.saveImage(bytes, name: name);
+    final result = await ImageGallerySaver.saveImage(bytes, name: name,quality: 100);
 
     return result['filePath'];
   }
