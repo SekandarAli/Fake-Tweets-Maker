@@ -185,7 +185,7 @@ class _ProfileAddDataState extends State<ProfileAddData> {
                       );
                     },
                     child: CircleAvatar(
-                      radius: 30,
+                      radius: MediaQuery.of(context).size.width*0.1,
                       backgroundColor: Colors.blue,
                       backgroundImage: profileImagePick != null
                           ? profileImagePath!.image
@@ -201,36 +201,30 @@ class _ProfileAddDataState extends State<ProfileAddData> {
                         }),
                       );
                     },
-                    child: CircleAvatar(
-                      radius: 70,
-                      backgroundColor: Colors.blue,
-                      backgroundImage: mainImagePick != null
-                          ? mainImagePath!.image
-                          : AssetImage("assets/images/cam.png"),
+                    // child: CircleAvatar(
+                    //   radius: 70,
+                    //   backgroundColor: Colors.blue,
+                    //   backgroundImage: mainImagePick != null
+                    //       ? mainImagePath!.image
+                    //       : AssetImage("assets/images/cam.png"),
+                    // ),
+
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                          height: MediaQuery.of(context).size.width*0.3,
+                          width: MediaQuery.of(context).size.width*0.45,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.fill,
+                                image: mainImagePick != null
+                                    ? mainImagePath!.image
+                                    : AssetImage(
+                                    "assets/images/cam.png")),
+
+                          )),
                     ),
                   ),
-                  //
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     showModalBottomSheet(
-                  //       context: context,
-                  //       builder: ((builder) {
-                  //         return bottomSheetImage();
-                  //       }),
-                  //     );
-                  //   },
-                  //   child: ClipRRect(
-                  //     borderRadius: BorderRadius.circular(30),
-                  //     child: Container(
-                  //         height: 150,
-                  //         decoration: BoxDecoration(
-                  //           image: DecorationImage(
-                  //               image: mainImagePick != null
-                  //                   ? mainImagePath!.image
-                  //                   : AssetImage("assets/images/cam.png")),
-                  //         )),
-                  //   ),
-                  // ),
                 ],
               ),
               SizedBox(
@@ -278,28 +272,6 @@ class _ProfileAddDataState extends State<ProfileAddData> {
                     height: 1,
                     thickness: 1,
                   ),
-                  // TextField(
-                  //   controller: userNameBlue,
-                  //   style: TextStyle(
-                  //     color: Colors.blue
-                  //   ),
-                  //   decoration: InputDecoration(
-                  //       prefixIcon: Icon(
-                  //         Icons.person_pin,
-                  //         color: Colors.blue,
-                  //       ),
-                  //       fillColor: Colors.white,
-                  //       filled: true,
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(5),
-                  //         borderSide: BorderSide.none,
-                  //       ),
-                  //       hintText: "UserName Blue"),
-                  // ),
-                  // Divider(
-                  //   height: 1,
-                  //   thickness: 1,
-                  // ),
 
                   SizedBox(height: 20),
                   TextField(
